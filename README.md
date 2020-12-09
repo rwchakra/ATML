@@ -1,5 +1,5 @@
 # ATML
-This repository contains ancilliary code for analysis on the ReBias paper by Bahng et al. (2019), for the Fall 2020 course Advanced Topics in Machine Learning. 
+This repository contains ancilliary code for analysis on the ReBias paper by Bahng et al. (2020), for the Fall 2020 course Advanced Topics in Machine Learning. 
 
 Authors:
 Rwiddhi Chakraborty
