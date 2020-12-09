@@ -10,7 +10,7 @@ ImageNet contains:
 
 1) Code to gather dataset and remove corrupted ids 
 2) Job runs (job_download_imagenet.sh added runs both 'download_9class_imagenet.py' and 'rmfiles2.py' sequentially)
-3) Seperate slurm output files for download_9class_imagenet,rmfiles2,rebias_training,vanilla_and_bais_training
+3) Seperate slurm output files for download_9class_imagenet,rmfiles2,rebias_training,vanilla_and_bias_training
 
 To Train, refer to README on original code:
 https://github.com/clovaai/rebias
