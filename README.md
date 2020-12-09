@@ -1,4 +1,10 @@
 # ATML
+This repository contains ancilliary code for analysis on the ReBias paper by Bahng et al. (2019), for the Fall 2020 course Advanced Topics in Machine Learning. 
+
+Authors:
+Rwiddhi Chakraborty
+Shubhayu Das
+
 Biased MNIST contains:
 
 1) csv data file for all runs
@@ -17,3 +23,10 @@ https://github.com/clovaai/rebias
 
 NOTE:
 It may well be required to change the versions of torchvision and torch on their requirements.txt to the latest versions. Otherwise one could run into a cuda error. 
+
+@inproceedings{bahng2019rebias,
+    title={Learning De-biased Representations with Biased Representations},
+    author={Bahng, Hyojin and Chun, Sanghyuk and Yun, Sangdoo and Choo, Jaegul and Oh, Seong Joon},
+    year={2020},
+    booktitle={International Conference on Machine Learning (ICML)},
+}
