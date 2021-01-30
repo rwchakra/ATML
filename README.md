@@ -8,9 +8,8 @@ Shubhayu Das
 Biased MNIST contains:
 
 1) csv data file for all runs
-2) slurm output files for all runs
-3) job files for all runs
-4) Plotting code 
+2) job files for all runs
+3) Plotting code 
 
 ImageNet contains:
 
