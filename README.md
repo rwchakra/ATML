@@ -22,7 +22,9 @@ To Train, refer to README on original code:
 https://github.com/clovaai/rebias
 
 NOTE:
-It may well be required to change the versions of torchvision and torch on their requirements.txt to the latest versions. Otherwise one could run into a cuda error. 
+It may well be required to change the versions of torchvision and torch on their requirements.txt to the latest versions. Otherwise one could run into a cuda error.
+
+Inorder to run jobs with the modified trainer, which atrificially increases the batch size, import the trainer_with_gradient_accumulation.py file instead for the traininer.py in the main_imagenet.py file on the original repository. 
 
 @inproceedings{bahng2019rebias,
     title={Learning De-biased Representations with Biased Representations},
