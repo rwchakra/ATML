@@ -1,11 +1,6 @@
 # ATML
 This repository contains ancilliary code for analysis on the ReBias paper by Bahng et al. (2020), for the Fall 2020 course Advanced Topics in Machine Learning. 
 
-Authors:
-Rwiddhi Chakraborty
-Shubhayu Das
-
-
 ## Biased MNIST contains:
 
 1) csv data file for all runs
