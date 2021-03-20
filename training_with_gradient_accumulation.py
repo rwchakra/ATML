@@ -313,19 +313,14 @@ class Trainer(object):
 
 			g_loss += _g_loss
 
-		# print('--------------------- i_g = ',self.i_g)
 		
 		g_loss = g_loss / 16
 		g_loss.backward()
 		self.i_g += 1
-		if self.i_g%16 == 0:
+		if self.i_g%16 == 0: # gradient accumulation
 			self.g_optimizer.step()
 			self.g_optimizer.zero_grad()
 
-
-		#self.g_optimizer.zero_grad()
-		#g_loss.backward()
-		#self.g_optimizer.step()
 
 		loss_dict['{}g_loss'.format(prefix)] = g_loss.item()
 
@@ -358,13 +353,11 @@ class Trainer(object):
 			f_loss += self.options.f_lambda_outer * f_loss_indep
 			loss_dict['{}f_loss_indep'.format(prefix)] = f_loss_indep.item()
 
-		
-		# print('--------------------- i_f = ',self.i_f)
 
 		f_loss = f_loss / 16
 		f_loss.backward()
 		self.i_f += 1        
-		if self.i_f%16 == 0:
+		if self.i_f%16 == 0:  # gradient accumulation
 			self.f_optimizer.step()
 			self.f_optimizer.zero_grad()
 
