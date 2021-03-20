@@ -1,9 +1,6 @@
-"""Minor modification on ReBias
+"""ReBias
 Copyright (c) 2020-present NAVER Corp.
 MIT license
-
-Modification made: The trainier is hardcoded to accumulate gradients every 8 batches, and take a 
-optimization step only after accumulating gradients for 8 batches
 
 Unified implementation of the de-biasing minimax optimisation by various methods including,
 - ReBias (ours, outer_criterion='RbfHSIC', inner criterion='MinusRbfHSIC')
@@ -23,8 +20,6 @@ To see the configurations for each experiment, please refer to the following fil
 - main_imagenet.py
 - main_action.py
 """
-
-
 import itertools
 import os
 
@@ -187,6 +182,9 @@ class Trainer(object):
 		self.logger.log('Outer criterion: {}'.format(self.outer_criterion.__class__.__name__))
 		self.logger.log(self.options)
 
+		self.i_g = 1
+		self.i_f = 1
+
 	def _set_models(self):
 		raise NotImplementedError
 
@@ -315,17 +313,19 @@ class Trainer(object):
 
 			g_loss += _g_loss
 
-		#-----modified part-----------
-		if self.i_g%8 == 0:
+		# print('--------------------- i_g = ',self.i_g)
+		
+		g_loss = g_loss / 16
+		g_loss.backward()
+		self.i_g += 1
+		if self.i_g%16 == 0:
 			self.g_optimizer.step()
 			self.g_optimizer.zero_grad()
-			g_loss.backward()
-			self.i_g += 1
-		else:
-			g_loss.backward()
-			self.i_g += 1
-		#-----------------------------
 
+
+		#self.g_optimizer.zero_grad()
+		#g_loss.backward()
+		#self.g_optimizer.step()
 
 		loss_dict['{}g_loss'.format(prefix)] = g_loss.item()
 
@@ -358,16 +358,15 @@ class Trainer(object):
 			f_loss += self.options.f_lambda_outer * f_loss_indep
 			loss_dict['{}f_loss_indep'.format(prefix)] = f_loss_indep.item()
 
-		#-----modified part-----------
-		if self.i_f%8 == 0:
+		
+		# print('--------------------- i_f = ',self.i_f)
+
+		f_loss = f_loss / 16
+		f_loss.backward()
+		self.i_f += 1        
+		if self.i_f%16 == 0:
 			self.f_optimizer.step()
 			self.f_optimizer.zero_grad()
-			f_loss.backward()
-			self.i_f += 1
-		else:
-			f_loss.backward()
-			self.i_f += 1
-		#----------------------------
 
 		loss_dict['{}f_loss'.format(prefix)] = f_loss.item()
 
